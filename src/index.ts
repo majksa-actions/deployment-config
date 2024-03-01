@@ -1,19 +1,22 @@
 import * as core from '@actions/core';
 import * as C from './constants';
-import { greet } from './utils/greeting';
+import { createManifests } from './utils/manifest';
 
 /**
  * GitHub Action entrypoint.
  */
 async function run(): Promise<void> {
   try {
-    const name: string = core.getInput(C.INPUT_NAME) || C.DEFAULT_NAME;
-    core.debug(`${C.INPUT_NAME}: ${name}`);
+    const source: string = core.getInput(C.INPUT_SOURCE);
+    core.debug(`${C.INPUT_SOURCE}: ${source}`);
 
-    const greeting = greet(name);
+    const target: string = core.getInput(C.INPUT_TARGET);
+    core.debug(`${C.INPUT_TARGET}: ${target}`);
 
-    core.setOutput(C.OUTPUT_GREETING, greeting);
-    core.notice(greeting, { title: 'Greeting' });
+    const environment: string = core.getInput(C.INPUT_ENVIRONMENT);
+    core.debug(`${C.INPUT_ENVIRONMENT}: ${environment}`);
+
+    createManifests(source, target, environment);
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message);
     else core.setFailed(String(error));

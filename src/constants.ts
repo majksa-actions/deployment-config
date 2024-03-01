@@ -1,6 +1,4 @@
 // Inputs
-export const INPUT_NAME = 'name';
-export const DEFAULT_NAME = 'world';
-
-// Outputs
-export const OUTPUT_GREETING = 'greeting';
+export const INPUT_SOURCE = 'source';
+export const INPUT_TARGET = 'target';
+export const INPUT_ENVIRONMENT = 'environment';

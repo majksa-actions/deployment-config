@@ -1,13 +1,15 @@
-name: "Template action"
-description: "TypeScript action template"
+name: "Deployment Config"
+description: "Merges all deployment configs into manifests."
 inputs:
-  name:
-    description: "Who to say hello world to:"
-    required: false
-    default: "world"
-outputs:
-  greeting:
-    description: "The greeting message"
+  source:
+    description: "Source directory to parse deployment config from"
+    required: true
+  target:
+    description: "Target directory to write deployment manifest to"
+    required: true
+  environment:
+    description: "Environment to deploy to"
+    required: true
 runs:
   using: "node20"
   main: "dist/index.js"

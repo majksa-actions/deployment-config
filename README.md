@@ -1,2 +1,3 @@
-# action
-TypeScript action template
+# Deployment Config action
+
+Merges all deployment configs into manifests.

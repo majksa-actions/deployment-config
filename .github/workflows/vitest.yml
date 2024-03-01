@@ -1,0 +1,13 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  vitest:
+    uses: majksa-actions/workflows/.github/workflows/vitest.yml@v1
