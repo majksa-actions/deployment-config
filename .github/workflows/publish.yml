@@ -1,0 +1,12 @@
+name: Publish
+
+on:
+  release:
+    types: [published, edited]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    uses: majksa-actions/workflows/.github/workflows/action-publish.yml@v1

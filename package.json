@@ -1,0 +1,21 @@
+{
+  "name": "@majksa-actions/template",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "lint": "biome check .",
+    "format": "biome check --apply-unsafe . && biome format . --write",
+    "build": "bun build src/index.ts --outdir dist --sourcemap=external --minify --target node"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.5.3",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1"
+  },
+  "version": "1.0.2"
+}

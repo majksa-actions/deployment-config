@@ -1,0 +1,13 @@
+name: "Template action"
+description: "TypeScript action template"
+inputs:
+  name:
+    description: "Who to say hello world to:"
+    required: false
+    default: "world"
+outputs:
+  greeting:
+    description: "The greeting message"
+runs:
+  using: "node20"
+  main: "dist/index.js"
