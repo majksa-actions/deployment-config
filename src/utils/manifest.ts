@@ -1,5 +1,5 @@
-import deepmerge from 'deepmerge';
 import { existsSync, promises as fs, readdirSync } from 'fs';
+import deepmerge from 'deepmerge';
 import * as YAML from 'yaml';
 
 export const createManifests = async (source: string, target: string, environment: string) => {

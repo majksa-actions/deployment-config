@@ -1,5 +1,5 @@
-import { test, vi } from 'vitest';
 import { fs, vol } from 'memfs';
+import { test, vi } from 'vitest';
 
 const prepareMocks = () => {
   vi.mock('fs', () => ({
