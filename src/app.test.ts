@@ -1,7 +1,7 @@
 import { fs, vol } from 'memfs';
 import { test, vi } from 'vitest';
-import { run } from './app';
 import { parse } from 'yaml';
+import { run } from './app';
 
 const prepareMocks = () => {
   vi.mock('fs', () => ({
