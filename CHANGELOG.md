@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/majksa-actions/deployment-config/compare/v1.0.0...v1.1.0) (2024-03-02)
+
+
+### Features
+
+* add main file ([0579307](https://github.com/majksa-actions/deployment-config/commit/05793072fe9f4bbaf1602961fbe0d9574f8be1d8))
+
 ## 1.0.0 (2024-03-02)
 
 
