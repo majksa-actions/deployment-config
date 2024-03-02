@@ -1,6 +1,7 @@
 {
   "name": "@majksa-actions/deployment-config",
   "module": "src/index.ts",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
     "lint": "biome check .",
