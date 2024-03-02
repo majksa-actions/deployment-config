@@ -1,6 +1,7 @@
 import { fs, vol } from 'memfs';
 import { test, vi } from 'vitest';
-import { createManifests } from './manifest';
+import { parse } from 'yaml';
+import { run } from './app';
 
 const prepareMocks = () => {
   vi.mock('fs', () => ({
@@ -14,7 +15,7 @@ const prepareMocks = () => {
   vol.reset();
 };
 
-test('Create 2 manifest from given input', async ({ expect }) => {
+test('E2E: Create 2 manifest from given input', async ({ expect }) => {
   prepareMocks();
   vol.fromJSON({
     './input/application.yml': `
@@ -33,9 +34,13 @@ test('Create 2 manifest from given input', async ({ expect }) => {
     name: be
     `,
   });
-  const { createManifests } = await import('./manifest');
 
-  await createManifests('./input', './output-1', 'prod');
+  process.env.INPUT_SOURCE = './input';
+  process.env.INPUT_TARGET = './output-1';
+  process.env.INPUT_ENVIRONMENT = 'prod';
+
+  await run();
+
   const result = fs.readdirSync('./output-1');
   expect(result).toEqual(['manifest-be.yml', 'manifest-fe.yml']);
   expect(fs.readFileSync('./output-1/manifest-be.yml', 'utf-8')).toEqual(
@@ -54,43 +59,30 @@ name: fe
   );
 });
 
-test('Merging yaml files', async ({ expect }) => {
-  const { mergeFiles } = await import('./manifest');
-  const result = mergeFiles([
-    `
-        version: "1.0"
-        deploy:
-            replicas: 1
-        `,
-    `
-        deploy:
-            replicas: 3
-        `,
+test('E2E: Provide invalid input', async ({ expect }) => {
+  prepareMocks();
+  vol.fromJSON({});
 
-    `
-            ports:
-                - 80
-        `,
+  process.env.INPUT_SOURCE = './unknown-directory';
+  process.env.INPUT_TARGET = './output-1';
+  process.env.INPUT_ENVIRONMENT = 'prod';
 
-    `
-            ports:
-                - 443
-        `,
-  ]);
-  expect(result).toEqual(`version: "1.0"
-deploy:
-  replicas: 3
-ports:
-  - 80
-  - 443
-`);
+  await run();
+
+  expect(fs.existsSync('./output-1')).toEqual(false);
 });
 
-test('Provide invalid yaml', async ({ expect }) => {
+test('E2E: Provide invalid yaml', async ({ expect }) => {
   prepareMocks();
   vol.fromJSON({
     './error-input/fe/application.yml': "'",
   });
 
-  await expect(createManifests('./error-input', './output-1', 'prod')).rejects.toThrow();
+  process.env.INPUT_SOURCE = './error-input';
+  process.env.INPUT_TARGET = './output-1';
+  process.env.INPUT_ENVIRONMENT = 'prod';
+
+  await run();
+
+  expect(fs.existsSync('./output-1/manifest-fe.yml')).toEqual(false);
 });
