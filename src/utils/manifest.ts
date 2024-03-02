@@ -3,6 +3,9 @@ import deepmerge from 'deepmerge';
 import * as YAML from 'yaml';
 
 export const createManifests = async (source: string, target: string, environment: string) => {
+  if (!existsSync(source)) {
+    throw `Source directory ${source} does not exist`;
+  }
   await fs.mkdir(target, { recursive: true });
   for (const app of readdirSync(source)) {
     if ((await fs.stat(`${source}/${app}`)).isDirectory()) {
