@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/majksa-actions/deployment-config/compare/v1.2.0...v1.2.1) (2024-03-02)
+
+
+### Bug Fixes
+
+* build file with mjs extensions ([48c5d5e](https://github.com/majksa-actions/deployment-config/commit/48c5d5e31355d6b73e43da383c60c52025525e74))
+
 ## [1.2.0](https://github.com/majksa-actions/deployment-config/compare/v1.1.0...v1.2.0) (2024-03-02)
 
 
