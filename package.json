@@ -7,7 +7,7 @@
     "lint": "biome check .",
     "format": "biome check --apply-unsafe . && biome format . --write",
     "test": "vitest",
-    "build": "bun build src/index.ts --outdir dist --sourcemap=external --minify --target node"
+    "build": "bun build src/index.ts --outdir dist --sourcemap=inline --minify --target node --entry-naming [dir]/[name].m[ext]"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.5.3",
